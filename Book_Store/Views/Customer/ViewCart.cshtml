@@ -1,0 +1,210 @@
+﻿@model IEnumerable<Book_Store.Models.Order>
+    @{
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    }
+
+    <style>
+        #img1 {
+            height: 40px;
+        }
+
+        footer {
+        }
+
+        #lab_social_icon_footer {
+            padding: 40px 0;
+            background-color: black;
+        }
+
+            #lab_social_icon_footer a {
+                color: #333;
+            }
+
+            #lab_social_icon_footer .social:hover {
+                -webkit-transform: scale(1.1);
+                -moz-transform: scale(1.1);
+                -o-transform: scale(1.1);
+            }
+
+            #lab_social_icon_footer .social {
+                -webkit-transform: scale(0.8);
+                /* Browser Variations: */
+
+                -moz-transform: scale(0.8);
+                -o-transform: scale(0.8);
+                -webkit-transition-duration: 0.5s;
+                -moz-transition-duration: 0.5s;
+                -o-transition-duration: 0.5s;
+            }
+            /*
+            Multicoloured Hover Variations
+        */
+
+            #lab_social_icon_footer #social-fb:hover {
+                color: #3B5998;
+            }
+
+            #lab_social_icon_footer #social-tw:hover {
+                color: #4099FF;
+            }
+
+            #lab_social_icon_footer #social-gp:hover {
+                color: #d34836;
+            }
+
+            #lab_social_icon_footer #social-em:hover {
+                color: #f39c12;
+            }
+
+        i {
+            color: white;
+            text-align: center;
+        }
+
+        #i-search {
+            color: #000000;
+        }
+
+        #div1 {
+            height: 300px;
+        }
+
+        li:hover {
+            background-color: #27859B;
+            border-radius: 10px;
+        }
+
+        .copy-div {
+            text-align: center;
+            color: white;
+        }
+
+        .inner-border {
+            border: 20px solid black;
+            box-shadow: inset 0px 0px 0px 10px red;
+            box-sizing: border-box;
+        }
+
+        #btn1:hover {
+            background-color: #ffd5d7;
+        }
+
+        /* cart */
+        .img-cart {
+            display: block;
+            max-width: 50px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        table tr td {
+            border: 1px solid #FFFFFF;
+        }
+
+        table tr th {
+            background: #eee;
+        }
+
+        .panel-shadow {
+            box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+        }
+
+        .btn-default {
+            color: #333;
+            background-color: #fff;
+            border-color: #ccc;
+        }
+
+        .pencil {
+            color: green;
+        }
+
+        #div12 {
+            @*margin-left: 185px;
+            *@
+        }
+    </style>
+
+    <div id="div12" class="container-fluid bootstrap snippets bootdey">
+        <div class="col-md-12 col-sm-12 content">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-info panel-shadow">
+                        <div class="panel-heading">
+                            <h3>
+                                <img class="img-circle img-thumbnail" src="https://bootdey.com/img/Content/user_3.jpg">
+                                @Session["FirstName"]  @Session["LastName"]
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Book Name</th>
+                                            <th>Qty</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var data in Model)
+                                        {
+                                        <tr>
+                                            <td><img src=@data.ImageUrl class="img-cart" height="100" width="100"></td>
+                                            <td><strong>@data.BookName</strong></td>
+                                            <td>
+                                                <div class="form-inline">
+                                                    @* @Html.EditorFor(data => data.Quantity, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                    <input class="form-control" type="number" value=@data.Quantity min="1" id="input_@data.OrderId">
+                                                    <button rel="tooltip" class="btn btn-default" onclick="edit(@data.OrderDetailsid,@data.OrderId,@data.bookid)"><i class="fa fa-pencil pencil"></i></button>
+                                                    @*<a href="~/Customer/Update/@data.OrderDetailsid" class="btn btn-default"><i class="fa fa-pencil pencil"></i></a>*@
+                                                    <a href="~/Customer/DaleteCartProduct/@data.OrderDetailsid" class="btn btn-primary"><i class="fa fa-trash-o"></i></a>
+                                                </div>
+                                            </td>
+                                            <td>₹ @data.price</td>
+                                            <td> @data.totalPrice</td>
+                                        </tr>
+                                        }
+                                        <tr>
+                                            <td colspan="6">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right"><strong>Total</strong></td>
+                                            <td>₹ @TempData["TotalPrice"]</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="~/Customer/Home" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
+                    @if(Convert.ToInt32(TempData["count"])==0){
+                    <button class="btn btn-primary pull-right" onclick="notregister()">
+                        Next<span class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+                    <script>
+                        function notregister() {
+                            alert("Your Cart Is Empty ");
+                        }
+                    </script>
+                    }else{
+                    <a href="~/Customer/Checkout" class="btn btn-primary pull-right">Next<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <script>
+        function edit(id, orderid, bookid) {
+            var qty = parseInt(document.getElementById("input_" + orderid).value);
+            window.location.href = `UpdateCartProduct?id=${id}&qty=${qty}&bookid=${bookid}`;
+        }
+    </script>

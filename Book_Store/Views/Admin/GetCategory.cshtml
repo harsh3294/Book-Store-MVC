@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Book_Store.Models.Category>
+
+@{
+    ViewBag.Title = "GetCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>GetCategory</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddCategory")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category_Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category_Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateCategoryById", new { id = item.Category_Id }) |
+                @Html.ActionLink("Details", "GetCategoryById", new { id = item.Category_Id }) |
+                @Html.ActionLink("Delete", "DeleteCategoryById", new { id = item.Category_Id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Book_Store.Models.Location>
+
+@{
+    ViewBag.Title = "GetLocation";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>GetLocation</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddLocation")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Location_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location_Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location_Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateLocationById", new { id = item.Location_Id }) |
+                @Html.ActionLink("Details", "GetLocationById", new { id = item.Location_Id }) |
+                @Html.ActionLink("Delete", "DeleteLocationById", new { id = item.Location_Id })
+            </td>
+        </tr>
+    }
+
+</table>

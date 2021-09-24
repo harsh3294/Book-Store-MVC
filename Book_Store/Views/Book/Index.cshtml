@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Book_Store.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Add New Book", "Create")
+</p>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Store_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book_Details_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book_Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book_Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book_Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN_10)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total_Pages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book_Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Publisher_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Publication_Date)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Store_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book_Details_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book_Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book_Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book_Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN_10)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Language)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total_Pages)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Book_Image)" alt="Alternate Text" width="200" height="250" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Publisher_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Publication_Date)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Book_Id }) |
+                    @Html.ActionLink("Details", "GetBookById", new { id = item.Book_Id }) |
+                    @Html.ActionLink("Delete", "DeleteBookById", new { id = item.Book_Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+

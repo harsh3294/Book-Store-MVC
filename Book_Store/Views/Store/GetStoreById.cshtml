@@ -1,0 +1,42 @@
+﻿@model Book_Store.Models.Store
+
+@{
+    ViewBag.Title = "GetStoreById";
+}
+
+<h2>GetStoreById</h2>
+
+<div>
+    <h4>Store</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Store_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Store_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Store_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Store_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "UpdateStoreById", new { id = Model.Store_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
